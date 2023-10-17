@@ -37,8 +37,3 @@ spec:
         automated: 
           prune: true
           selfHeal: true
-        managedNamespaceMetadata:
-          annotations:
-            abc: '123'
-        syncOptions:
-          - CreateNamespace=true
