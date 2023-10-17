@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.cluster.name }}-argocd-configs
+  name: argocd-configs
 spec:
   project: default
   source:

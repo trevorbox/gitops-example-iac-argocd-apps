@@ -10,14 +10,14 @@ spec:
         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
         revision: HEAD
         files:
-          - path: {{ printf "clusters/%s/teams/*/apps/*.yaml" .Values.cluster.name }}
+          - path: {{ printf "clusters/%s/orgs/*/teams/*/apps/*.yaml" .Values.cluster.name }}
   template:
     metadata:
       name: >-
-        {{ printf "{{path[1]}}-{{path[3]}}-{{name}}" }}
+        {{ printf "{{path[3]}}-{{path[5]}}-{{name}}" }}
     spec:
       project: >-
-        {{ printf "{{path[3]}}" }}
+        {{ printf "{{path[5]}}" }}
       source:
         path: >-
           {{ printf "{{source.path}}" }}
