@@ -4,6 +4,6 @@ source:
   targetRevision: HEAD
   path: deploy/helm/app
   helm:
-    valuesFile: values-dev.yaml
+    valuesFile: values.yaml
 destination:
   namespace: myorg-team1-go-app
