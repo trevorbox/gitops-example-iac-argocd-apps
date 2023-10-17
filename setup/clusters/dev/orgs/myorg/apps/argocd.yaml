@@ -5,4 +5,4 @@ source:
   helm:
     valuesFile: values.yaml
 destination:
-  namespace: argocd-myorg
+  namespace: myorg-argocd
