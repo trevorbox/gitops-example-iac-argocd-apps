@@ -14,10 +14,10 @@ spec:
   template:
     metadata:
       name: >-
-        {{ printf "{{.path[1]}}-{{.path[3]}}-{{name}}" }}
+        {{ printf "{{path[1]}}-{{path[3]}}-{{name}}" }}
     spec:
       project: >-
-        {{ printf "{{.path[3]}}" }}
+        {{ printf "{{path[3]}}" }}
       source:
         path: >-
           {{ printf "{{source.path}}" }}
