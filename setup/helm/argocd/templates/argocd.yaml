@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: {{ .Release.Namespace }}
+  labels:
+    {{- include "argocd.labels" . | nindent 4 }}
+spec:
+  applicationInstanceLabelKey: {{ .Release.Namespace }}
+  applicationSet: {}
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: true
+    service:
+      type: ''
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  notifications:
+    enabled: false
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  initialSSHKnownHosts: {}
+  sso:
+    dex:
+      openShiftOAuth: true
+    provider: dex
+  rbac:
+    defaultPolicy: ''
+    policy: |
+      g, cluster-admins, role:admin
+    scopes: '[groups]'
+  repo: {}
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun        
+  ha:
+    enabled: false
+  tls:
+    ca: {}
+  redis: {}
+  controller:
+    processors: {}
+    sharding: {}

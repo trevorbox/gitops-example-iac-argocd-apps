@@ -1,0 +1,8 @@
+name: argocd
+source:
+  repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+  path: setup/helm/argocd
+  helm:
+    valuesFile: values.yaml
+destination:
+  namespace: argocd-myorg

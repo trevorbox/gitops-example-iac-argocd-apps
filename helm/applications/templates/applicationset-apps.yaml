@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ .Values.cluster.name }}-apps
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: {{ .Values.preserveResourcesOnDeletion }}
+  generators:
+    - git:
+        repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+        revision: HEAD
+        files:
+          - path: {{ printf "clusters/%s/teams/*/apps/*.yaml" .Values.cluster.name }}
+  template:
+    metadata:
+      name: >-
+        {{ printf "{{.path[1]}}-{{.path[3]}}-{{name}}" }}
+    spec:
+      project: >-
+        {{ printf "{{.path[3]}}" }}
+      source:
+        path: >-
+          {{ printf "{{source.path}}" }}
+        repoURL: >-
+          {{ printf "{{source.repoURL}}" }}
+        targetRevision: >-
+          {{ printf "{{source.targetRevision}}" }}
+        helm:
+          valueFiles:
+            - >- 
+              {{ printf "{{source.helm.valuesFile}}" }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: >-
+          {{ printf "{{destination.namespace}}" }}
+      syncPolicy:
+        automated: 
+          prune: true
+          selfHeal: true
+        managedNamespaceMetadata:
+          annotations:
+            abc: 123
+        syncOptions:
+          - CreateNamespace=true
