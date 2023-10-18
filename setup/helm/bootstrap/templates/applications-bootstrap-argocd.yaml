@@ -1,19 +1,21 @@
+{{- range .Values.orgs }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Namespace }}
+  name: bootstrap-{{ .name }}-argocd-{{ $.Values.cluster.name }}
   annotations:
-    argocd.argoproj.io/sync-wave: "-2"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+    repoURL: {{ .repoURL }}
     targetRevision: HEAD
     path: helm/argocd
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .name }}-argocd
   syncPolicy:
     automated: 
       prune: true
       selfHeal: true
+{{- end }}

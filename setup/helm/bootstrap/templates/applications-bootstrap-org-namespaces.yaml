@@ -2,9 +2,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap-org-namespaces-{{ .name }}-{{ $.Values.cluster.name }}
+  name: bootstrap-{{ .name }}-org-namespaces-{{ $.Values.cluster.name }}
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   project: default
   source:

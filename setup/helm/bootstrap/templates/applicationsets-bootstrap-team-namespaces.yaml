@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: bootstrap-team-namespaces-{{ .name }}-{{ $.Values.cluster.name }}
+  name: bootstrap-{{ .name }}-team-namespaces-{{ $.Values.cluster.name }}
 spec:
   syncPolicy:
     preserveResourcesOnDeletion: {{ $.Values.preserveResourcesOnDeletion }}
@@ -15,9 +15,9 @@ spec:
   template:
     metadata:
       name: >-
-        {{ printf "team-project-{{path[3]}}-{{path[5]}}-{{path[7]}}" }}
+        {{ printf "bootstrap-{{path[3]}}-team-namespace-{{path[5]}}-{{path[7]}}" }}
       annotations:
-        argocd.argoproj.io/sync-wave: "-1"
+        argocd.argoproj.io/sync-wave: "-2"
     spec:
       project: default
       source:

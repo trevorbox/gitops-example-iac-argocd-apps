@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap-rootapp-{{ .name }}-{{ $.Values.cluster.name }}
+  name: bootstrap-{{ .name }}-rootapp-{{ $.Values.cluster.name }}
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
