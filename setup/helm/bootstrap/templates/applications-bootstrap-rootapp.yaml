@@ -12,7 +12,9 @@ spec:
     targetRevision: HEAD
     path: helm/rootapp
     helm:
-      valuesFile: values-{{ $.Values.cluster.name }}.yaml
+      parameters:
+        - name: cluster.name
+          value: {{ $.Values.cluster.name }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .name }}-argocd
