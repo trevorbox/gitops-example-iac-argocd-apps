@@ -1,0 +1,9 @@
+name: go-app2
+source:
+  repoURL: https://github.com/trevorbox/gitops-example-iac-go.git
+  targetRevision: HEAD
+  path: deploy/helm/app
+  helm:
+    valuesFile: values.yaml
+destination:
+  namespace: myorg-team1-go-app
