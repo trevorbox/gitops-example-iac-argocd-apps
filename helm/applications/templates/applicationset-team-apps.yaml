@@ -17,7 +17,7 @@ spec:
         {{ printf "{{path[3]}}-{{path[5]}}-{{name}}" }}
     spec:
       project: >-
-        {{ printf "{{path[5]}}" }}
+        {{ printf "{{path[3]}}-{{path[5]}}" }}
       source:
         path: >-
           {{ printf "{{source.path}}" }}
