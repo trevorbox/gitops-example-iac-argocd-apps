@@ -3,6 +3,7 @@ kind: ApplicationSet
 metadata:
   name: team-apps-{{ .Values.cluster.name }}
 spec:
+  goTemplate: true
   syncPolicy:
     preserveResourcesOnDeletion: {{ .Values.preserveResourcesOnDeletion }}
   generators:
@@ -14,10 +15,10 @@ spec:
   template:
     metadata:
       name: >-
-        {{ printf "{{path[3]}}-{{path[5]}}-{{path[7]}}-{{name}}" }}
+        {{ printf "{{.path[3]}}-{{.path[5]}}-{{.path[7]}}-{{ index (splitList "." .path.filenameNormalized) 0 }}" }}
     spec:
       project: >-
-        {{ printf "{{path[3]}}-{{path[5]}}" }}
+        {{ printf "{{.path[3]}}-{{.path[5]}}" }}
       source:
         path: >-
           {{ printf "{{source.path}}" }}
@@ -32,7 +33,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: >-
-          {{ printf "{{path[3]}}-{{path[5]}}-{{path[7]}}" }}
+          {{ printf "{{.path[3]}}-{{.path[5]}}-{{.path[7]}}" }}
       syncPolicy:
         automated: 
           prune: true
