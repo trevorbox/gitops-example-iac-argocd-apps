@@ -1,15 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-configs-{{ .Values.cluster.name }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+  name: rootapp-{{ .Values.cluster.name }}
 spec:
   project: default
   source:
     repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
     targetRevision: HEAD
-    path: helm/argocd-configs
+    path: helm/applications
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .Release.Namespace }}
