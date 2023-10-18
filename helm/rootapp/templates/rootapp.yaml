@@ -8,6 +8,9 @@ spec:
     repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
     targetRevision: HEAD
     path: helm/applications
+    helm:
+      valueFiles:
+        - values-{{ .Values.cluster.name }}.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .Release.Namespace }}
