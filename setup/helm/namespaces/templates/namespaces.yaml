@@ -1,6 +1,17 @@
+{{- range .Values.orgs -}}
+{{- $orgName := .name }}
+{{- range .teams -}}
+{{- $teamName := .name }}
+{{- range .apps -}}
+{{- $appName := .name }}
+---
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: myorg-team1-go-app
+  name: {{ printf "%s-%s-%s" $orgName $teamName $appName }}
   labels:
-    argocd.argoproj.io/managed-by: myorg-argocd
+    argocd.argoproj.io/managed-by: {{ printf "%s-argocd" $orgName }}
+...
+{{- end }}
+{{- end }}
+{{- end }}

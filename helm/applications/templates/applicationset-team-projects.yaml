@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: team-projects-{{ .Values.cluster.name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: {{ .Values.preserveResourcesOnDeletion }}
+  generators:
+    - git:
+        repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+        revision: HEAD
+        files:
+          - path: {{ printf "clusters/%s/orgs/*/teams/*/apps/*.yaml" .Values.cluster.name }}
+  template:
+    metadata:
+      name: >-
+        {{ printf "team-project-{{path[3]}}-{{path[5]}}" }}
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+        targetRevision: HEAD
+        path: helm/appproject
+        helm:
+          parameters:
+            - name: org.name
+              value: >-
+                {{ printf "{{path[3]}}" }}
+            - name: team.name 
+              value: >-
+                {{ printf "{{path[5]}}" }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: {{ .Release.Namespace }}
+      syncPolicy:
+        automated: 
+          prune: true
+          selfHeal: true

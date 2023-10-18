@@ -1,0 +1,9 @@
+orgs:
+  - name: myorg
+    teams: 
+      - name: team1
+        apps:
+          - name: go-app
+      - name: team2
+        apps:
+          - name: go-app

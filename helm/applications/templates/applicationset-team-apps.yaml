@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.cluster.name }}-apps
+  name: team-apps-{{ .Values.cluster.name }}
 spec:
   syncPolicy:
     preserveResourcesOnDeletion: {{ .Values.preserveResourcesOnDeletion }}
@@ -32,7 +32,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: >-
-          {{ printf "{{destination.namespace}}" }}
+          {{ printf "{{path[3]}}-{{path[5]}}-{{name}}" }}
       syncPolicy:
         automated: 
           prune: true

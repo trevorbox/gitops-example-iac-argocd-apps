@@ -1,17 +1,13 @@
-{{- range .Values.teams }}
----
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: {{ . }}
+  name: {{ printf "%s-%s" .Values.org.name .Values.team.name }}
 spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
   destinations:
-    - namespace: '*'
+    - namespace: {{ printf "%s-%s-*" .Values.org.name .Values.team.name | squote }}
       server: '*'
   sourceRepos:
     - '*'
-...
-{{- end }}

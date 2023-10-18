@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: bootstrap-org
+  name: bootstrap-orgs-{{ .Values.cluster.name }}
 spec:
   syncPolicy:
-    preserveResourcesOnDeletion: true
+    preserveResourcesOnDeletion: {{ .Values.preserveResourcesOnDeletion }}
   generators:
     - git:
         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       name: >-
-        {{ printf "{{path[2]}}-{{path[4]}}-{{name}}" }}
+        {{ printf "{{path[4]}}-{{name}}-{{path[2]}}" }}
     spec:
       project: default
       source:
