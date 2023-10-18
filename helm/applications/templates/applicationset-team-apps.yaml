@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       name: >-
-        {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}-{{index .path.segments 7}}-{{index (splitList '.' .path.filenameNormalized) 0}}" }}
+        {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}-{{index .path.segments 7}}-{{index (splitList \".\" .path.filenameNormalized) 0}}" }}
     spec:
       project: >-
         {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}" }}
