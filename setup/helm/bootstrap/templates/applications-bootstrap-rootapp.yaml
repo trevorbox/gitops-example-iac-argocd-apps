@@ -5,6 +5,8 @@ metadata:
   name: bootstrap-{{ .name }}-rootapp-{{ $.Values.cluster.name }}
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -20,6 +22,6 @@ spec:
     namespace: {{ .name }}-argocd
   syncPolicy:
     automated: 
-      prune: false
+      prune: true
       selfHeal: true
 {{- end }}
