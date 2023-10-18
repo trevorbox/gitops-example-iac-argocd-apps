@@ -15,25 +15,25 @@ spec:
   template:
     metadata:
       name: >-
-        {{ printf "{{.path[3]}}-{{.path[5]}}-{{.path[7]}}-test" }}
+        {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}-{{index .path.segments 7}}-{{index (splitList "." .path.filenameNormalized) 0}}" }}
     spec:
       project: >-
-        {{ printf "{{.path[3]}}-{{.path[5]}}" }}
+        {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}" }}
       source:
         path: >-
-          {{ printf "{{source.path}}" }}
+          {{ printf "{{.source.path}}" }}
         repoURL: >-
-          {{ printf "{{source.repoURL}}" }}
+          {{ printf "{{.source.repoURL}}" }}
         targetRevision: >-
-          {{ printf "{{source.targetRevision}}" }}
+          {{ printf "{{.source.targetRevision}}" }}
         helm:
           valueFiles:
             - >- 
-              {{ printf "{{source.helm.valuesFile}}" }}
+              {{ printf "{{.source.helm.valuesFile}}" }}
       destination:
         server: https://kubernetes.default.svc
         namespace: >-
-          {{ printf "{{.path[3]}}-{{.path[5]}}-{{.path[7]}}" }}
+          {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}-{{index .path.segments 7}}" }}
       syncPolicy:
         automated: 
           prune: true
