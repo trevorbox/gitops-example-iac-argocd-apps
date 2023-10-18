@@ -32,7 +32,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: >-
-          {{ printf "{{path[3]}}-{{path[5]}}-{{name}}" }}
+          {{ printf "{{destination.namespace}}" }}
       syncPolicy:
         automated: 
           prune: true
