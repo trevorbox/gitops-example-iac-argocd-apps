@@ -4,7 +4,7 @@ kind: Application
 metadata:
   name: bootstrap-rootapp-{{ .name }}-{{ $.Values.cluster.name }}
   annotations:
-    argocd.argoproj.io/sync-wave: "-2"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:

@@ -11,7 +11,7 @@ spec:
         repoURL: {{ .repoURL }}
         revision: HEAD
         directories:
-          - path: {{ printf "clusters/%s/orgs/*/teams/*/contexts/*" $.Values.cluster.name }}
+          - path: {{ printf "clusters/%s/orgs/%s/teams/*/contexts/*" $.Values.cluster.name .name }}
   template:
     metadata:
       name: >-
