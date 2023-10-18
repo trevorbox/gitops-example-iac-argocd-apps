@@ -1,8 +1,0 @@
-name: rootapp
-source:
-  repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
-  path: helm/rootapp
-  helm:
-    valuesFile: values-dev.yaml
-destination:
-  namespace: myorg-argocd

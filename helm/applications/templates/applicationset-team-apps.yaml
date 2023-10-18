@@ -10,11 +10,11 @@ spec:
         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
         revision: HEAD
         files:
-          - path: {{ printf "clusters/%s/orgs/*/teams/*/apps/*.yaml" .Values.cluster.name }}
+          - path: {{ printf "clusters/%s/orgs/*/teams/*/contexts/*/apps/*.yaml" .Values.cluster.name }}
   template:
     metadata:
       name: >-
-        {{ printf "{{path[3]}}-{{path[5]}}-{{name}}" }}
+        {{ printf "{{path[3]}}-{{path[5]}}-{{path[7]}}-{{name}}" }}
     spec:
       project: >-
         {{ printf "{{path[3]}}-{{path[5]}}" }}
@@ -32,7 +32,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: >-
-          {{ printf "{{destination.namespace}}" }}
+          {{ printf "{{path[3]}}-{{path[5]}}-{{path[7]}}" }}
       syncPolicy:
         automated: 
           prune: true

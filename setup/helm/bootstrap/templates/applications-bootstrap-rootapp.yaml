@@ -1,0 +1,23 @@
+{{- range .Values.orgs }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-rootapp-{{ .name }}-{{ $.Values.cluster.name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  project: default
+  source:
+    repoURL: {{ .repoURL }}
+    targetRevision: HEAD
+    path: helm/rootapp
+    helm:
+      valuesFile: values-{{ $.Values.cluster.name }}.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .name }}-argocd
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true
+{{- end }}

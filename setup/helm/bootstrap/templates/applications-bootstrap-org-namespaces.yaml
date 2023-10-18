@@ -1,0 +1,25 @@
+{{- range .Values.orgs }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-org-namespaces-{{ .name }}-{{ $.Values.cluster.name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+    targetRevision: HEAD
+    path: setup/helm/org-namespaces
+    helm:
+      parameters:
+        - name: org.name
+          value: {{ .name }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-gitops
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true
+{{- end }}

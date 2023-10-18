@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: {{ printf "%s-%s-%s" .Values.org.name .Values.team.name .Values.context.name }}
+  labels:
+    argocd.argoproj.io/managed-by: {{ printf "%s-argocd" .Values.org.name }}
