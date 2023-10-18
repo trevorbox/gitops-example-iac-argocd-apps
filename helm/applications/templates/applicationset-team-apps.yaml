@@ -5,7 +5,7 @@ metadata:
 spec:
   goTemplate: true
   syncPolicy:
-    preserveResourcesOnDeletion: {{ .Values.preserveResourcesOnDeletion }}
+    preserveResourcesOnDeletion: false
   generators:
     - git:
         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'

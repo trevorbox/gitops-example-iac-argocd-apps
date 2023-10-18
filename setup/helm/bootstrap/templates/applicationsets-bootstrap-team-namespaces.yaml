@@ -5,7 +5,7 @@ metadata:
   name: bootstrap-{{ .name }}-team-namespaces-{{ $.Values.cluster.name }}
 spec:
   syncPolicy:
-    preserveResourcesOnDeletion: {{ $.Values.preserveResourcesOnDeletion }}
+    preserveResourcesOnDeletion: true
   generators:
     - git:
         repoURL: {{ .repoURL }}
