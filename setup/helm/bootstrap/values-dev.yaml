@@ -4,6 +4,5 @@ preserveResourcesOnDeletion: false
 orgs:
   - org:
       name: myorg
-    generator:
-      git:
-        repoURL: https://github.com/trevorbox/gitops-example-iac-argocd-apps.git
+    repoURL: https://github.com/trevorbox/gitops-example-iac-argocd-apps.git
+    
