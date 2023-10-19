@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: {{ printf "%s-%s" .Values.org.name .Values.team.name }}
+  name: {{ printf "%s-%s" .Values.org.name .Values.team.name | squote}}
 spec:
-  description: {{ printf "Team: %s Organization: %s" .Values.team.name .Values.org.name }}
+  description: {{ printf "Team: %s Organization: %s" .Values.team.name .Values.org.name | squote }}
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
@@ -13,4 +13,4 @@ spec:
   sourceRepos:
     - '*'
   sourceNamespaces:
-    - {{ printf "%s-argocd" .Values.org.name }}
+    - {{ printf "%s-argocd" .Values.org.name | squote }}
