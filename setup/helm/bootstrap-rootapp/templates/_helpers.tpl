@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "rootapp.name" -}}
+{{- define "bootstrap-rootapp.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "rootapp.fullname" -}}
+{{- define "bootstrap-rootapp.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "rootapp.chart" -}}
+{{- define "bootstrap-rootapp.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "rootapp.labels" -}}
-helm.sh/chart: {{ include "rootapp.chart" . }}
-{{ include "rootapp.selectorLabels" . }}
+{{- define "bootstrap-rootapp.labels" -}}
+helm.sh/chart: {{ include "bootstrap-rootapp.chart" . }}
+{{ include "bootstrap-rootapp.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "rootapp.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "rootapp.name" . }}
+{{- define "bootstrap-rootapp.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "bootstrap-rootapp.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "rootapp.serviceAccountName" -}}
+{{- define "bootstrap-rootapp.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "rootapp.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "bootstrap-rootapp.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

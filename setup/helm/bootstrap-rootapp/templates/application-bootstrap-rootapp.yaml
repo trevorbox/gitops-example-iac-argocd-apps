@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rootapp-{{ .Values.cluster.name }}
+  name: bootstrap-rootapp-{{ .Values.cluster.name }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
