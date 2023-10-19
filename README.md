@@ -2,7 +2,7 @@
 A chart to demonstrate ArgoCD application deployments to many environment using a flat file structure
 
 ```sh
-helm upgrade -i openshift-gitops-operator setup/helm/openshift-gitops-operator -n openshift-operators --wait
+helm upgrade -i openshift-gitops-operator setup/helm/openshift-gitops-operator -n openshift-operators
 ```
 
 ```sh
