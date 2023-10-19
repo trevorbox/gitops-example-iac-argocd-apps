@@ -3,11 +3,14 @@ kind: AppProject
 metadata:
   name: {{ printf "%s-%s" .Values.org.name .Values.team.name }}
 spec:
+  description: {{ printf "%s team in the %s org" .Values.team.name .Values.org.name }} team
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
   destinations:
     - namespace: {{ printf "%s-%s-*" .Values.org.name .Values.team.name | squote }}
-      server: '*'
+      server: https://kubernetes.default.svc
   sourceRepos:
     - '*'
+  sourceNamespaces:
+    - {{ printf "%s-argocd" .Values.org.name }}
