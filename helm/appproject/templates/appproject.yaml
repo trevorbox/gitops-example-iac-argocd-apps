@@ -3,7 +3,7 @@ kind: AppProject
 metadata:
   name: {{ printf "%s-%s" .Values.org.name .Values.team.name }}
 spec:
-  description: {{ printf "%s team in the %s org" .Values.team.name .Values.org.name }} team
+  description: {{ printf "Team: %s Organization: %s" .Values.team.name .Values.org.name }}
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
