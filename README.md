@@ -6,5 +6,5 @@ helm upgrade -i openshift-gitops-operator setup/helm/openshift-gitops-operator -
 ```
 
 ```sh
-helm upgrade -i rootapp setup/helm/rootapp -n openshift-gitops -f setup/helm/rootapp/values-dev.yaml
+helm upgrade -i bootstrap-rootapp setup/helm/bootstrap-rootapp -n openshift-gitops -f setup/helm/bootstrap-rootapp/values-dev.yaml
 ```
