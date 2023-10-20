@@ -5,5 +5,3 @@ orgs:
     repoURL: https://github.com/trevorbox/gitops-example-iac-argocd-apps.git
   - name: org2
     repoURL: https://github.com/trevorbox/gitops-example-iac-argocd-apps.git
-  - name: org3
-    repoURL: https://github.com/trevorbox/gitops-example-iac-argocd-apps.git
