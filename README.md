@@ -154,7 +154,7 @@ The ApplicationSet [./helm/applications/templates/applicationset-team-projects.y
 ...
 ```
 
-The ApplicationSet [./helm/applications/templates/applicationset-team-apps.yaml](./helm/applications/templates/applicationset-team-apps.yaml) uses a [Git Generator Files](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Git/#git-generator-files) subtype to dynamically create Applications based yaml files within an expected directory path.
+The ApplicationSet [./helm/applications/templates/applicationset-team-apps.yaml](./helm/applications/templates/applicationset-team-apps.yaml) uses a [Git Generator Files](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Git/#git-generator-files) subtype to dynamically create Applications based on yaml files within an expected directory path.
 
 ```yaml
 ...
@@ -167,7 +167,7 @@ The ApplicationSet [./helm/applications/templates/applicationset-team-apps.yaml]
 ...
 ```
 
-Each ApplicationSet references a path structure where teams would be responsible for submitting pull requests to for changing their application's deployment code reference throughout different SDLC environments.
+Each ApplicationSet references a path structure where teams would be responsible for submitting pull requests to for changing their application's deployment IAC code throughout different SDLC environments.
 
 ```text
 [tbox@fedora gitops-example-iac-argocd-apps]$ tree clusters
@@ -197,9 +197,9 @@ clusters
 ...
 ```
 
-Next notice the parameters within each file. Each file name will translate to the final deployed app name in the namespace defined by the directory structure of were the parameter file is placed `<org>-<team>-<context>`.
+Each file name will translate to the final deployed app name in the namespace defined by the directory structure were the yaml file is placed. For example, the first yaml file listed in the `clusters/dev/orgs/org1/teams/team1/contexts/context1/apps` directory will translate to a deployment called `go-app` in the namespace `org1-team1-context1` in the `dev` OpenShift SDLC cluster. 
 
-We want each app to use the Git [Commit Pinning](https://argo-cd.readthedocs.io/en/stable/user-guide/tracking_strategies/#commit-pinning) deployment strategy.
+Next, notice the parameters within each file. We want each app to use the Git [Commit Pinning](https://argo-cd.readthedocs.io/en/stable/user-guide/tracking_strategies/#commit-pinning) deployment strategy.
 
 ```text
 [tbox@fedora gitops-example-iac-argocd-apps]$ cat clusters/dev/orgs/org1/teams/team1/contexts/context1/apps/go-app.yaml 
