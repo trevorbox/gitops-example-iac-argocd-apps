@@ -30,20 +30,19 @@ helm upgrade -i bootstrap-rootapp setup/helm/bootstrap-rootapp -n openshift-gito
 
 ### Openshift GitOps ArgoCD Bootstrap RootApp:
 
-The Openshift GitOps argocd instance service account has been given cluster admin privileges to provision namespaces and bootstrap tenant argocd rootapp deployments per organization.
-A cluster admin needs to maintain the [./setup/helm/bootstrap-rootapp/values.yaml](./setup/helm/bootstrap-rootapp/values.yaml) yaml file with a list of orgs and repo urls for each org's monorepo. Each repoURL should have a `helm/rootapp` and `helm/argocd` chart to instantiate the tenant argocd and applications.
+The Openshift GitOps argocd instance service account has been given cluster admin privileges to provision namespaces and bootstrap tenant argocd deployments and rootapp deployments per organization.
 
 ![Openshift GitOps Bootstrap Rootapp](.img/openshift-gitops-bootstrap-rootapp.png)
 
-### Org1 ArgoCD RootApp:
+### Tenant ArgoCD RootApps:
 
-This is an argocd instance to manage many applications for many teams within the Org1 organization. It was bootstrapped from the Openshift GitOps instance.
+An ArgoCD instance is created for Org1 and Org2 in this example. Each org has many teams and each team has many contexts to deploy components into.
+
+The org1-argocd rootapp:
 
 ![Org1 Rootapp](.img/org1-argocd-rootapp.png)
 
-### Org2 ArgoCD RootApp
-
-This is an argocd instance to manage many applications for many teams within the Org1 organization. It was bootstrapped from the Openshift GitOps instance.
+The org2-argocd rootapp:
 
 ![Org2 Rootapp](.img/org2-argocd-rootapp.png)
 
