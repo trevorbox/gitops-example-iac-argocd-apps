@@ -12,7 +12,7 @@ spec:
         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
         revision: HEAD
         directories:
-          - path: {{ printf "clusters/%s/orgs/*/teams/*" .Values.cluster.name }}
+          - path: {{ printf "clusters/%s/orgs/%s/teams/*" .Values.cluster.name .Values.org.name }}
   template:
     metadata:
       name: >-
