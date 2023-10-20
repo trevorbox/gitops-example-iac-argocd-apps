@@ -12,6 +12,6 @@ helm upgrade -i bootstrap-rootapp setup/helm/bootstrap-rootapp -n openshift-gito
 Openshift GitOps
 This argocd instance has been given cluster admin privileges to provision namespaces and bootstrap argocd tenant deployments and tenant rootapps for organizations.
 
-![Openshift GitOps Bootstrap Rootapp](.img/openshift-gitops-bootstrap-rootapp2.png)
+![Openshift GitOps Bootstrap Rootapp](.img/openshift-gitops-bootstrap-rootapp.png)
 
-![Org1 Rootapp](.img/org1-argocd-rootapp2.png)
+![Org1 Rootapp](.img/org1-argocd-rootapp.png)
