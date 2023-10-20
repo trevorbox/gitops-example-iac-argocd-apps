@@ -41,7 +41,8 @@ This is an argocd instance to manage many applications for many teams within the
 
 The code within the [./setup/helm](./setup/helm) directory is intended to be maintained by a cluster admin and instantiated by the [./setup/helm/bootstrap-rootapp](./setup/helm/bootstrap-rootapp) chart once per SDLC OpenShift cluster.
 
-```sh
+```text
+[tbox@fedora gitops-example-iac-argocd-apps]$ tree setup
 setup
 └── helm
     ├── bootstrap
@@ -86,7 +87,7 @@ setup
 
 When new orgs need to be added to the SDLC cluster, a cluster-admin simply needs to maintain the [./setup/helm/bootstrap/values.yaml](./setup/helm/bootstrap/values.yaml) file and changes will propagate automatically by the rootapp re-syncing...
 
-```sh
+```text
 [tbox@fedora gitops-example-iac-argocd-apps]$ cat ./setup/helm/bootstrap/values.yaml
 cluster:
   name:
@@ -101,7 +102,7 @@ orgs:
 
 The org monorepo is the responsibility of the organizations operations team and needs to contain its own `helm/argocd` and `helm/rootapp` helm charts since the bootstrapping from Openshift Gitops expects these paths. The rootapp can then instantiate the `helm/applications` chart to deploy tenant apps. Notice that there is also a `helm/appproject` chart used for dynamically generating AppProjects based on a folder structure.
 
-```sh
+```text
 [tbox@fedora gitops-example-iac-argocd-apps]$ tree helm/
 helm/
 ├── applications
@@ -159,7 +160,7 @@ The ApplicationSet [./helm/applications/templates/applicationset-team-apps.yaml]
 
 Each ApplicationSet references a path structure where teams would be responsible for submitting pull requests to for changing their application's deployment code reference throughout different SDLC environments.
 
-```sh
+```text
 [tbox@fedora gitops-example-iac-argocd-apps]$ tree clusters
 clusters
 ├── dev
