@@ -11,8 +11,9 @@ spec:
     targetRevision: HEAD
     path: helm/applications
     helm:
-      valueFiles:
-        - values-{{ .Values.cluster.name }}.yaml
+      values: |
+        cluster:
+          name: {{ .Values.cluster.name }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .Release.Namespace }}

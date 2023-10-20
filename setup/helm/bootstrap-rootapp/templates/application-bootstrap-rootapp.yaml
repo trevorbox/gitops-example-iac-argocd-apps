@@ -11,8 +11,11 @@ spec:
     targetRevision: HEAD
     path: setup/helm/bootstrap
     helm:
-      valueFiles:
-        - values-{{ .Values.cluster.name }}.yaml
+      values: |
+        cluster:
+          name: {{ .Values.cluster.name }}
+        orgs:
+          {{- .Values.orgs | toYaml | nindent 10 }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .Release.Namespace }}
