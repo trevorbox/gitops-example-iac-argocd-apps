@@ -1,6 +1,16 @@
 # gitops-example-iac-argocd-apps
 
-A chart to demonstrate ArgoCD application deployments from tenant ArgoCD instances, bootstrapped by a cluster-admin ArgoCD instance using a flat file structure/monorepo.
+A chart to demonstrate ArgoCD application deployments from tenant ArgoCD instances using a flat file structure/[monorepo](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Use-Cases/#use-case-monorepos).
+
+This example assumes the following:
+
+- Each OpenShift cluster correlates to a different SDLC environment, for example dev, test and prod.
+- Application IAC are maintained by development teams.
+- Developments teams belong to Organizations within a company. These could also be considered business units.
+- Each Organization maintains an ArgoCD instance deployed per cluster.
+- Every Organization has an operations team to review changes submitted by pull request processes from development teams before allowing changes to SDLC environments.
+- All SDLC environments are synced using a flat file structure/[monorepo](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Use-Cases/#use-case-monorepos) from the default branch's `HEAD` Git commit pointer.
+- Cluster administrators can simply bootstrap tenant ArgoCD instances and deploy a root application (rootapp) into them (to instantiate the monorepos) using the default Openshift GitOps instance. 
 
 ## Setup
 
@@ -192,7 +202,7 @@ Next notice the parameters within each file. Each file name will translate to th
 
 We want each app to use the Git [Commit Pinning](https://argo-cd.readthedocs.io/en/stable/user-guide/tracking_strategies/#commit-pinning) deployment strategy.
 
-```sh
+```text
 [tbox@fedora gitops-example-iac-argocd-apps]$ cat clusters/dev/orgs/org1/teams/team1/contexts/context1/apps/go-app.yaml 
 source:
   repoURL: https://github.com/trevorbox/gitops-example-iac-go.git
