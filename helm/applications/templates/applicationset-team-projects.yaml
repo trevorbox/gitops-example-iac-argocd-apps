@@ -1,42 +1,42 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: team-projects-{{ .Values.cluster.name }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
-spec:
-  syncPolicy:
-    preserveResourcesOnDeletion: true
-  generators:
-    - git:
-        repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
-        revision: HEAD
-        directories:
-          - path: {{ printf "clusters/%s/orgs/%s/teams/*" .Values.cluster.name .Values.org.name }}
-  template:
-    metadata:
-      name: >-
-        {{ printf "team-project-{{path[3]}}-{{path[5]}}" }}
-      annotations:
-        argocd.argoproj.io/sync-wave: "-1"
-    spec:
-      project: default
-      source:
-        repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
-        targetRevision: test-label-key
-        path: helm/appproject
-        helm:
-          parameters:
-            - name: org.name
-              value: >-
-                {{ printf "{{path[3]}}" }}
-            - name: team.name 
-              value: >-
-                {{ printf "{{path[5]}}" }}
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: {{ .Release.Namespace }}
-      syncPolicy:
-        automated: 
-          prune: true
-          selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: team-projects-{{ .Values.cluster.name }}
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "-1"
+# spec:
+#   syncPolicy:
+#     preserveResourcesOnDeletion: true
+#   generators:
+#     - git:
+#         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+#         revision: HEAD
+#         directories:
+#           - path: {{ printf "clusters/%s/orgs/%s/teams/*" .Values.cluster.name .Values.org.name }}
+#   template:
+#     metadata:
+#       name: >-
+#         {{ printf "team-project-{{path[3]}}-{{path[5]}}" }}
+#       annotations:
+#         argocd.argoproj.io/sync-wave: "-1"
+#     spec:
+#       project: default
+#       source:
+#         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
+#         targetRevision: test-label-key
+#         path: helm/appproject
+#         helm:
+#           parameters:
+#             - name: org.name
+#               value: >-
+#                 {{ printf "{{path[3]}}" }}
+#             - name: team.name 
+#               value: >-
+#                 {{ printf "{{path[5]}}" }}
+#       destination:
+#         server: https://kubernetes.default.svc
+#         namespace: {{ .Release.Namespace }}
+#       syncPolicy:
+#         automated: 
+#           prune: true
+#           selfHeal: true
