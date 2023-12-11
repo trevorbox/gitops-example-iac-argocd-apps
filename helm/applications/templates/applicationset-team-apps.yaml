@@ -17,8 +17,9 @@ spec:
       name: >-
         {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}-{{index .path.segments 7}}-{{index (splitList \".\" .path.filenameNormalized) 0}}" }}
     spec:
-      project: >-
-        {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}" }}
+      # project: >-
+      #   {{ printf "{{index .path.segments 3}}-{{index .path.segments 5}}" }}
+      project: default
       source:
         path: >-
           {{ printf "{{.source.path}}" }}
