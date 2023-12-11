@@ -12,7 +12,7 @@ spec:
   generators:
     - git:
         repoURL: {{ .repoURL }}
-        revision: HEAD
+        revision: test-label-key
         directories:
           - path: {{ printf "clusters/%s/orgs/%s/teams/*/contexts/*" $.Values.cluster.name .name }}
   template:
@@ -25,7 +25,7 @@ spec:
       project: default
       source:
         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
-        targetRevision: HEAD
+        targetrevision: test-label-key
         path: setup/helm/team-namespace
         helm:
           parameters:

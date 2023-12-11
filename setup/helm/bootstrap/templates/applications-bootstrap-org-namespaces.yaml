@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
-    targetRevision: HEAD
+    targetrevision: test-label-key
     path: setup/helm/org-namespaces
     helm:
       parameters:

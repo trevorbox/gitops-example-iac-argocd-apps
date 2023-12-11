@@ -10,7 +10,7 @@
 #   generators:
 #     - git:
 #         repoURL: 'https://github.com/trevorbox/gitops-example-iac-argocd-apps.git'
-#         revision: HEAD
+#         revision: test-label-key
 #         directories:
 #           - path: {{ printf "clusters/%s/orgs/%s/teams/*" .Values.cluster.name .Values.org.name }}
 #   template:
