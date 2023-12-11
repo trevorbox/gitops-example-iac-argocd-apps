@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: {{ .repoURL }}
-    targetRevision: HEAD
+    targetRevision: test-label-key
     path: helm/argocd
   destination:
     server: https://kubernetes.default.svc
