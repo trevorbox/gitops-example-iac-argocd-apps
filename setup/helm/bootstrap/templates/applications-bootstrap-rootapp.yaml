@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     repoURL: {{ .repoURL }}
-    targetRevision: HEAD
+    targetRevision: test-label-key
     path: helm/rootapp
     helm:
       values: |
