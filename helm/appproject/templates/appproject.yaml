@@ -14,3 +14,4 @@ spec:
     - '*'
   sourceNamespaces:
     - {{ printf "%s-argocd" .Values.org.name | squote }}
+    - openshift-gitops
